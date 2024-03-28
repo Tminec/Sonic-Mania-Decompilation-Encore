@@ -1,0 +1,33 @@
+@echo off
+title BeLuFaaFPS's Automatic Sonic Mania Decompilation Encore Mode Patcher
+echo BeLuFaaFPS's Automatic Sonic Mania Decompilation Encore Mode Patcher v1
+:check
+	if exist bin/data/encore.data (goto :check2) else (goto :Exit)
+:check2
+	if exist Sonic-Mania/Data.rsdk (goto :extract) else (echo Starting..)
+:start
+cd bin
+echo Copy your Data.rsdk file into the "bin" folder.
+echo Data.rsdk can be found in "C:\Program Files (x86)\Steam\steamapps\common\Sonic Mania"
+pause>nul
+if exist Data.rsdk (goto :Extract) else (goto :nodatarsdk)
+:extract
+echo Extracting Files...
+echo Extracting RSDKV5U.exe
+	7za e data/encore.data RSDKv5U.exe -r -aoa > nul
+echo Extracting Game.dll
+	7za e data/encore.data Game.dll -r -aoa > nul
+echo Extracting Settings.ini....
+	7za e data/encore.data Settings.ini -r -aoa > nul
+if exist RSDKV5U.exe (echo Succes) else (echo ERROR)
+echo Press any key to exit.....
+pause>nul
+cd ..
+start bin
+exit
+
+:nodatarsdk
+echo Cannot found Data.rsdk file.
+echo Press any key to exit....
+pause>nul
+exit
